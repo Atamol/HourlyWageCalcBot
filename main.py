@@ -3,6 +3,8 @@ from discord import app_commands
 import datetime
 import re
 
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+
 class bot(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
