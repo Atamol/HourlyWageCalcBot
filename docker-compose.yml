@@ -1,1 +1,10 @@
-s
+version: '3'
+services:
+  discord_bot:
+    image: python:3.8-slim
+    container_name: discord_bot
+    working_dir: /app
+    volumes:
+      - .:/app
+    env_file: .env
+    command: python main.py
