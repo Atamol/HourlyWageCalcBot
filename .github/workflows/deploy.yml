@@ -28,7 +28,7 @@ jobs:
             export BOT_TOKEN=$BOT_TOKEN
             export DISCORD_BUTTON_CH=$DISCORD_BUTTON_CH
             export DISCORD_LOG_CH=$DISCORD_LOG_CH
-            cd /cd/to_my_project
+            cd /tell/me/the/path
             docker-compose down
             docker-compose up -d
           EOF
