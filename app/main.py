@@ -9,8 +9,8 @@ import os
 load_dotenv()
 
 BOT_TOKEN = os.getenv('BOT_TOKEN')
-CHANNEL_1_ID = os.getenv('CHANNEL_1_ID')
-CHANNEL_2_ID = os.getenv('CHANNEL_2_ID')
+DISCORD_BUTTON_CH = os.getenv('DISCORD_BUTTON_CH')
+DISCORD_LOG_CH = os.getenv('DISCORD_LOG_CH')
 
 class bot(discord.Client):
     def __init__(self, *args, **kwargs):
