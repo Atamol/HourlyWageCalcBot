@@ -20,14 +20,14 @@ jobs:
 
       - name: SSH and deploy to server
         env:
-          TOKEN: ${{ secrets.BOT_TOKEN }}
-          CHANNEL_1_ID: ${{ secrets.CHANNEL_1_ID }}
-          CHANNEL_2_ID: ${{ secrets.CHANNEL_2_ID }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          DISCORD_BUTTON_CH: ${{ secrets.DISCORD_BUTTON_CH }}
+          DISCORD_LOG_CH: ${{ secrets.DISCORD_LOG_CH }}
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-            export TOKEN=$TOKEN
-            export CHANNEL_1_ID=$CHANNEL_1_ID
-            export CHANNEL_2_ID=$CHANNEL_2_ID
+            export BOT_TOKEN=$BOT_TOKEN
+            export DISCORD_BUTTON_CH=$DISCORD_BUTTON_CH
+            export DISCORD_LOG_CH=$DISCORD_LOG_CH
             cd /cd/to_my_project
             docker-compose down
             docker-compose up -d
