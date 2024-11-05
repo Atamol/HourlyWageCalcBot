@@ -3,7 +3,14 @@ from discord import app_commands
 import datetime
 import re
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+CHANNEL_1_ID = os.getenv('CHANNEL_1_ID')
+CHANNEL_2_ID = os.getenv('CHANNEL_2_ID')
 
 class bot(discord.Client):
     def __init__(self, *args, **kwargs):
