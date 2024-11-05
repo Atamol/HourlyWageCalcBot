@@ -16,19 +16,16 @@ jobs:
       - name: Add SSH key
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: SSH and deploy to server
+      - name: Deploy to server
         env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          DISCORD_BUTTON_CH: ${{ secrets.DISCORD_BUTTON_CH }}
-          DISCORD_LOG_CH: ${{ secrets.DISCORD_LOG_CH }}
+          BOT_TOKEN: os.env.BOT_TOKEN
+          DISCORD_BUTTON_CH: os.env.DISCORD_BUTTON_CH
+          DISCORD_LOG_CH: os.env.DISCORD_LOG_CH
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
             export BOT_TOKEN=$BOT_TOKEN
             export DISCORD_BUTTON_CH=$DISCORD_BUTTON_CH
             export DISCORD_LOG_CH=$DISCORD_LOG_CH
-            cd /tell/me/the/path
+            cd /app/main.py
             docker-compose down
             docker-compose up -d
-          EOF
