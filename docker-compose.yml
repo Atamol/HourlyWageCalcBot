@@ -1,13 +1,14 @@
 version: '3.8'
 services:
-  discord_bot:
+  HourlyWageCalcBot:
+    Build: .
     image: python:3.8-slim
     container_name: HourlyWageCalcBot
     working_dir: /app
     volumes:
       - ./app:/app
     environment:
-      - BOT_TOKEN=${BOT_TOKEN}
-      - DISCORD_BUTTON_CH=${DISCORD_BUTTON_CH}
-      - DISCORD_LOG_CH=${DISCORD_LOG_CH}
+      - BOT_TOKEN
+      - DISCORD_BUTTON_CH
+      - DISCORD_LOG_CH
     command: python /app/main.py
