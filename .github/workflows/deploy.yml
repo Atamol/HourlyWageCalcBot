@@ -15,11 +15,11 @@ jobs:
 
       - name: Copy .env to server
         run: |
-          scp -o StrictHostKeyChecking=no .env $(grep SERVER_USER .env | cut -d '=' -f2)@$(grep SERVER_IP .env | cut -d '=' -f2):/home/atamol/HourlyWageCalcBot/.env
+          scp -o StrictHostKeyChecking=no .env ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/home/atamol/HourlyWageCalcBot/.env
 
       - name: Deploy to server
         run: |
-          sshpass -p "$(grep SERVER_PASSWORD .env | cut -d '=' -f2)" ssh -o StrictHostKeyChecking=no $(grep SERVER_USER .env | cut -d '=' -f2)@$(grep SERVER_IP .env | cut -d '=' -f2) << 'EOF'
+          sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
             cd /home/atamol/HourlyWageCalcBot
             docker-compose down
             docker-compose up -d --build
