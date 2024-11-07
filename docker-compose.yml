@@ -1,7 +1,8 @@
 version: '3.8'
 services:
   HourlyWageCalcBot:
-    Build: .
+    build:
+      context: .
     image: python:3.8-slim
     container_name: HourlyWageCalcBot
     working_dir: /app
