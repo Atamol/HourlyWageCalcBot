@@ -12,8 +12,6 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 DISCORD_BUTTON_CH = os.getenv('DISCORD_BUTTON_CH')
 DISCORD_LOG_CH = os.getenv('DISCORD_LOG_CH')
 
-print("Bot is starting up...")
-
 class bot(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
