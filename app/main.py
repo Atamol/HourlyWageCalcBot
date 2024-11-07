@@ -22,7 +22,7 @@ class bot(discord.Client):
         print(f"Logged in as {self.user}!")
         channel = self.get_channel(DISCORD_BUTTON_CH)
         if channel:
-            await channel.send("再起動しました。")
+            await channel.send("テスト")
 
 bot = bot(intents=discord.Intents.default())
 user_data = {}
