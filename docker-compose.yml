@@ -9,3 +9,4 @@ services:
     env_file:
       - /home/atamol/HourlyWageCalcBot/.env
     command: python /app/main.py
+    restart: always
