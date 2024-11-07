@@ -19,10 +19,10 @@ jobs:
           DISCORD_LOG_CH: ${{ secrets.DISCORD_LOG_CH }}
         run: |
           sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-            cd /home/atamol/HourlyWageCalcBot
             export BOT_TOKEN=${BOT_TOKEN}
             export DISCORD_BUTTON_CH=${DISCORD_BUTTON_CH}
             export DISCORD_LOG_CH=${DISCORD_LOG_CH}
+            cd /home/atamol/HourlyWageCalcBot
             docker-compose down
             docker-compose up -d
           EOF
