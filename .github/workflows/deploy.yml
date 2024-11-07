@@ -1,4 +1,4 @@
-name: Deploy Discord Bot
+name: Deploy HourlyWageCalcBot
 
 on:
   push:
@@ -13,15 +13,13 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
+
       - name: Deploy to server
-        env:
-          BOT_TOKEN: os.env.BOT_TOKEN
-          DISCORD_BUTTON_CH: os.env.DISCORD_BUTTON_CH
-          DISCORD_LOG_CH: os.env.DISCORD_LOG_CH
         run: |
-            export BOT_TOKEN=$BOT_TOKEN
-            export DISCORD_BUTTON_CH=$DISCORD_BUTTON_CH
-            export DISCORD_LOG_CH=$DISCORD_LOG_CH
-            cd /app/main.py
+          sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+            cd /home/atamol/HourlyWageCalcBot
             docker-compose down
             docker-compose up -d
+          EOF
