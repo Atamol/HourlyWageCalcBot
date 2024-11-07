@@ -3,14 +3,11 @@ from discord import app_commands
 import datetime
 import re
 
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
-BOT_TOKEN = os.getenv('BOT_TOKEN')
-DISCORD_BUTTON_CH = os.getenv('DISCORD_BUTTON_CH')
-DISCORD_LOG_CH = os.getenv('DISCORD_LOG_CH')
+BOT_TOKEN = os.environ['BOT_TOKEN']
+DISCORD_BUTTON_CH = os.environ['DISCORD_BUTTON_CH']
+DISCORD_LOG_CH = os.environ['DISCORD_LOG_CH']
 
 class bot(discord.Client):
     def __init__(self, *args, **kwargs):
