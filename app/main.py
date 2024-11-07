@@ -12,8 +12,6 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 DISCORD_BUTTON_CH = os.getenv('DISCORD_BUTTON_CH')
 DISCORD_LOG_CH = os.getenv('DISCORD_LOG_CH')
 
-print('再起動しました。')
-
 class bot(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -22,6 +20,9 @@ class bot(discord.Client):
     async def on_ready(self):
         await self.tree.sync()
         print(f"Logged in as {self.user}!")
+        channel = self.get_channel(DISCORD_BUTTON_CH)
+        if channel:
+            await channel.send("再起動しました。")
 
 bot = bot(intents=discord.Intents.default())
 user_data = {}
