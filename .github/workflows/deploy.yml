@@ -13,10 +13,6 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Add SSH key
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-
       - name: Deploy to server
         env:
           BOT_TOKEN: os.env.BOT_TOKEN
