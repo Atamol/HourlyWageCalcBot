@@ -1,11 +1,11 @@
-version: '3'
+version: '3.8'
 services:
   discord_bot:
     image: python:3.8-slim
-    container_name: discord_bot
+    container_name: HourlyWageCalc
     working_dir: /app
     volumes:
-      - .:/app
+      - ./app:/app
     env_file:
       - .env
     command: python /app/main.py
