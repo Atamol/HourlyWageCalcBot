@@ -1,13 +1,13 @@
 version: '3.8'
 services:
   HourlyWageCalcBot:
+    build:
+      context: .
     image: python:3.8-slim
     container_name: HourlyWageCalcBot
     working_dir: /app
     volumes:
       - ./app:/app
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN}
-      - DISCORD_BUTTON_CH=${DISCORD_BUTTON_CH}
-      - DISCORD_LOG_CH=${DISCORD_LOG_CH}
+    env_file:
+      - .env
     command: python /app/main.py
