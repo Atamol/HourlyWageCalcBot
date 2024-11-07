@@ -8,21 +8,19 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
-      - name: Deploy to server
-        env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          DISCORD_BUTTON_CH: ${{ secrets.DISCORD_BUTTON_CH }}
-          DISCORD_LOG_CH: ${{ secrets.DISCORD_LOG_CH }}
+      - name: Copy .env to server
         run: |
-          sshpass -p "${{ secrets.SERVER_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-            export BOT_TOKEN=${BOT_TOKEN}
-            export DISCORD_BUTTON_CH=${DISCORD_BUTTON_CH}
-            export DISCORD_LOG_CH=${DISCORD_LOG_CH}
+          scp -o StrictHostKeyChecking=no .env $(grep SERVER_USER .env | cut -d '=' -f2)@$(grep SERVER_IP .env | cut -d '=' -f2):/home/atamol/HourlyWageCalcBot/.env
+
+      - name: Deploy to server
+        run: |
+          sshpass -p "$(grep SERVER_PASSWORD .env | cut -d '=' -f2)" ssh -o StrictHostKeyChecking=no $(grep SERVER_USER .env | cut -d '=' -f2)@$(grep SERVER_IP .env | cut -d '=' -f2) << 'EOF'
             cd /home/atamol/HourlyWageCalcBot
             docker-compose down
-            docker-compose up -d
+            docker-compose up -d --build
           EOF
