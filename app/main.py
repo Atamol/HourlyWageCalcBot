@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BOT_TOKEN = os.getenv('BOT_TOKEN')
-DISCORD_BUTTON_CH = os.getenv('DISCORD_BUTTON_CH')
-DISCORD_LOG_CH = os.getenv('DISCORD_LOG_CH')
+DISCORD_BUTTON_CH = int(os.getenv('DISCORD_BUTTON_CH'))
+DISCORD_LOG_CH = int(os.getenv('DISCORD_LOG_CH'))
 
 class bot(discord.Client):
     def __init__(self, *args, **kwargs):
