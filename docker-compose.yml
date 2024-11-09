@@ -7,6 +7,6 @@ services:
     volumes:
       - ./app:/app
     env_file:
-      - /home/atamol/HourlyWageCalcBot/.env
+      - .env
     command: python /app/main.py
     restart: always
