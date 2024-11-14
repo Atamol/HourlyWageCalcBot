@@ -1,0 +1,30 @@
+name: Deployment HourlyWageCalcBot
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to server
+        env:
+          SERVER_PASSWORD: ${{ secrets.SERVER_PASSWORD }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_IP: ${{ secrets.SERVER_IP }}
+        run: |
+          sshpass -p "$SERVER_PASSWORD" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP << 'EOF'
+            cd /home/atamol/HourlyWageCalcBot
+            docker-compose down || true
+            docker rm -f HourlyWageCalcBot || true
+            docker image rm -f HourlyWageCalcBot:latest || true
+            git pull
+            docker-compose up -d --build
+            echo "Deployment Complete"
+          EOF
