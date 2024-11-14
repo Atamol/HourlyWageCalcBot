@@ -12,17 +12,34 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 DISCORD_BUTTON_CH = int(os.getenv('DISCORD_BUTTON_CH'))
 DISCORD_LOG_CH = int(os.getenv('DISCORD_LOG_CH'))
 
+intents = discord.Intents.default()
+intents.message_content = True
+
 class bot(discord.Client):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.tree = app_commands.CommandTree(self)
         self.user_pending_reaction = set()
+
     async def on_ready(self):
         await self.tree.sync()
         print(f"Logged in as {self.user}!")
-        channel = self.get_channel(DISCORD_BUTTON_CH)
+        channel = self.get_channel(DISCORD_LOG_CHANNEL)
         if channel:
-            await channel.send("テスト")
+            await channel.send("再起動しました。")
+        else:
+            print("Error: Channel not found.")
+
+    async def on_message(self, message):
+        keywords = ["なんでも", "何でも"]
+        if any(keyword in message.content for keyword in keywords):
+            await message.channel.send("ん？")
+            await asyncio.sleep(0.5)
+            await message.channel.send("今")
+            await asyncio.sleep(0.5)
+            await message.channel.send("何でもするって")
+            await asyncio.sleep(0.75)
+            await message.channel.send("言ったよね？")
 
 bot = bot(intents=discord.Intents.default())
 user_data = {}
