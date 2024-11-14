@@ -1,4 +1,4 @@
-name: Deployment HourlyWageCalcBot
+name: Docker image CI
 
 on:
   push:
