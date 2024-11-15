@@ -26,7 +26,7 @@ class bot(discord.Client):
         print(f"Logged in as {self.user}!")
         channel = self.get_channel(DISCORD_LOG_CHANNEL)
         if channel:
-            await channel.send("テスト…再起動しました。")
+            await channel.send("再起動しました。")
         else:
             print("Error: Channel not found.")
 
